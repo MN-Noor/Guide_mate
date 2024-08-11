@@ -55,15 +55,7 @@ class _PlanTripPageState extends State<PlanTripPage> {
           '  Accessibility Needs: $_specialNeedsAccessibility\n'
           'Additional Notes: $_additionalNotes';
 
-      final prompt = ("This is user requirments${_result} based on these generate a proper planned trip. Generate the list of multiple locations to visit based on popular "
-          "tourist destinations user preferences.\n"
-          "For each segment of the trip, create two lists of 'origins' and 'destinations'. "
-          "The first list should include each starting location, and the second list should include the next destination in the sequence."
-          "Then, use the distance tool to calculate the travel time and distance between these locations. "
-          "Based on this, generate a comprehensive travel plan that outlines the journey, including "
-          "the travel times and distances for each segment.");
-
-      String? response = await GeminiService.generateContent(prompt);
+      String? response = await GeminiService.generateContent(_result);
       if (response != null) {
         Navigator.push(
           context,

@@ -5,7 +5,7 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 class GeminiService {
   Future<Map<String, String>> getDistance(
       String origin, String destination) async {
-    final apiKey = '';
+    final apiKey = 'AIzaSyCyhHSmSA9oeC7IkxBtaVKoKQ0uDMKkk04';
     final url = Uri.parse(
         'https://maps.googleapis.com/maps/api/distancematrix/json?origins=$origin&destinations=$destination&key=$apiKey');
 
@@ -53,7 +53,14 @@ class GeminiService {
     }
   }
 
-  static Future<String?> generateContent(String prompt) async {
+  static Future<String?> generateContent(String user_data) async {
+    final prompt = ("This is user requirments${user_data} based on these generate a proper planned trip. Generate the list of multiple locations to visit based on popular "
+        "tourist destinations user preferences.\n"
+        "For each segment of the trip, create two lists of 'origins' and 'destinations'. "
+        "The first list should include each starting location, and the second list should include the next destination in the sequence."
+        "Then, use the distance tool to calculate the travel time and distance between these locations. "
+        "Based on this, generate a comprehensive travel plan that outlines the journey, including "
+        "the travel times and distances for each segment.");
     final distanceTool = FunctionDeclaration(
         'getDistance',
         'Calculate the distance and duration between two locations using the Google Maps Distance Matrix API.',
@@ -71,7 +78,7 @@ class GeminiService {
     // Initialize the model
     final model = GenerativeModel(
       model: "gemini-1.5-pro-001",
-      apiKey: '',
+      apiKey: 'AIzaSyAgOqd66nXVEF32ucERbna0iMCqJu8Dtkk',
       tools: [
         Tool(functionDeclarations: [distanceTool])
       ],
@@ -98,7 +105,8 @@ class GeminiService {
         print(result.toString());
       }
       String finalResponse = allResponces.join('\n');
-      response = await chat.sendMessage(Content.text(finalResponse));
+      response = await chat.sendMessage(Content.text(
+          "create a proper planned trip keeping in mind the user preferences given here ${user_data} and add this distances and time between places which is provided here ${finalResponse} to ensure timely within budget trip "));
       String finalResult = response.text.toString();
       print('Model Response After Function Call: ${response.text}');
       return finalResult;
