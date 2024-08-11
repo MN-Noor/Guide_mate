@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "880781483078",
+    "project_id": "guidemate-98eb8",
+    "storage_bucket": "guidemate-98eb8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880781483078:android:369dafcc4d712f5a023e47",
+        "android_client_info": {
+          "package_name": "com.example.guide_mate_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxJKQUjrBPL7nTFutgaP0YYTdQQ0E9tN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
