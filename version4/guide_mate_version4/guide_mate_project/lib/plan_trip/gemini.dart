@@ -75,7 +75,6 @@ class GeminiService {
           'destination'
         ]));
 
-    // Initialize the model
     final model = GenerativeModel(
       model: "gemini-1.5-pro-001",
       apiKey: 'AIzaSyAgOqd66nXVEF32ucERbna0iMCqJu8Dtkk',
@@ -91,7 +90,6 @@ class GeminiService {
     // print('Function Calls: ${response.functionCalls}');
 
     final functionCalls = response.functionCalls.toList();
-    // When the model responds with a function call, invoke the function
     if (functionCalls.isNotEmpty) {
       List<Map<String, String>> allResponces = [];
       for (var functionCall in functionCalls) {
@@ -102,13 +100,13 @@ class GeminiService {
         final result = await GeminiService().getDistance(origin, destination);
         allResponces.add(result);
 
-        print(result.toString());
+        // print(result.toString());
       }
       String finalResponse = allResponces.join('\n');
       response = await chat.sendMessage(Content.text(
-          "create a proper planned trip keeping in mind the user preferences given here ${user_data} and add this distances and time between places which is provided here ${finalResponse} to ensure timely within budget trip "));
+          "create a proper planned trip keeping in mind the user preferences budget(within budget) and other needs given here ${user_data} and add this distances and time between places which is provided here ${finalResponse} to ensure timely trip within budget and time trip  and keeping in mind necessities and no of people and family and depending upon that recommend some local sites,parks or restaurants to visit and also given estimated price for all services "));
       String finalResult = response.text.toString();
-      print('Model Response After Function Call: ${response.text}');
+      // print('Model Response After Function Call: ${response.text}');
       return finalResult;
     }
   }
