@@ -97,9 +97,7 @@ class _Video360ScreenState extends State<Video360Screen> {
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton.icon(
-                    onPressed: () {
-                      _stopGuide();
-                    },
+                    onPressed: _stopGuide,
                     icon: const Icon(Icons.stop),
                     label: const Text('Stop Guide'),
                   ),
@@ -113,27 +111,7 @@ class _Video360ScreenState extends State<Video360Screen> {
   }
 
   void _startGuide() {
-    String city;
-
-    switch (widget.location) {
-      case 'HaLongBay':
-        city = 'Vietnam';
-        break;
-      case 'Hagia Sophia Mosque':
-        city = 'Istanbul';
-        break;
-      case 'Jheel Saif ul Malook':
-        city = 'Naran';
-        break;
-      case 'Victoria Falls':
-        city = 'Livingstone';
-        break;
-      case 'Taj Mahal Agra':
-        city = 'Agra';
-        break;
-      default:
-        city = 'Unknown';
-    }
+    String city = _mapLocationToCity(widget.location);
     _guideTTS.generateAndSpeakGuide(city);
     setState(() {
       _isGuidePlaying = true;
@@ -167,7 +145,24 @@ class _Video360ScreenState extends State<Video360Screen> {
       return await ref.getDownloadURL();
     } catch (e) {
       print('Error getting download URL: $e');
-      rethrow;
+      throw Exception('Failed to load video URL');
+    }
+  }
+
+  String _mapLocationToCity(String location) {
+    switch (location) {
+      case 'HaLongBay':
+        return 'Vietnam';
+      case 'Hagia Sophia Mosque':
+        return 'Istanbul';
+      case 'Jheel Saif ul Malook':
+        return 'Naran';
+      case 'Victoria Falls':
+        return 'Livingstone';
+      case 'Taj Mahal Agra':
+        return 'Agra';
+      default:
+        return 'Unknown';
     }
   }
 }

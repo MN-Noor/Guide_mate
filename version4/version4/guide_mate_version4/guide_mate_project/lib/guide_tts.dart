@@ -3,7 +3,8 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:http/http.dart' as http;
 
 Future<String> getWeatherInfo(String cityName) async {
-  String weatherApiKey = "6db2763627415e9e790c7174b573d636";
+  String weatherApiKey =
+      "6db2763627415e9e790c7174b573d636"; // Ensure this key is valid and not restricted
   final response = await http.get(Uri.parse(
       'http://api.openweathermap.org/data/2.5/weather?&appid=$weatherApiKey&q=$cityName'));
 
@@ -24,7 +25,8 @@ Future<String> getWeatherInfo(String cityName) async {
 }
 
 Future<String?> geminiContent(String prompt) async {
-  final geminiApiKey = 'AIzaSyCyhHSmSA9oeC7IkxBtaVKoKQ0uDMKkk04';
+  final geminiApiKey =
+      'AIzaSyCyhHSmSA9oeC7IkxBtaVKoKQ0uDMKkk04'; // Ensure this key is valid
   String url =
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=$geminiApiKey";
   Map<String, dynamic> body = {
@@ -63,7 +65,7 @@ Future<String?> geminiContent(String prompt) async {
 Future<String> generateGuide(String cityName) async {
   String weather = await getWeatherInfo(cityName);
   String prompt =
-      "This is current weather updates of a place $cityName $weather. As a tourist guide, guide the tourist about weather and guide them about clothing and other things which tourist should brought and measures to enjoy that weather , place and also guide them about culture of that place here and ensure that travelers have a memorable trip. Share safety measures to take when visiting this location and offer tips on how to make the most of their journey. Do not generate your response in readme form. Generate in simple text and do not add asterisks or any alphanumeric characters. Your response should be in one comprehensive paragraph without any formatting.Like human speech";
+      "This is the current weather update for $cityName: $weather. As a tourist guide, guide the tourist about the weather, clothing, and other essentials they should bring to enjoy this location. Also, share insights about the culture and local customs to ensure a memorable trip. Provide safety tips for visiting and advice on making the most of their journey.";
   String? response = await geminiContent(prompt);
   print(response);
   return response ?? "No guide content available.";
@@ -99,6 +101,7 @@ class GuideTTS {
 
     flutterTts.setErrorHandler((msg) {
       ttsState = TtsState.stopped;
+      print("Error: $msg");
     });
   }
 
