@@ -5,7 +5,7 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 class GeminiService {
   Future<Map<String, String>> getDistance(
       String origin, String destination) async {
-    final apiKey = 'AIzaSyCyhHSmSA9oeC7IkxBtaVKoKQ0uDMKkk04';
+    final apiKey = '';
     final url = Uri.parse(
         'https://maps.googleapis.com/maps/api/distancematrix/json?origins=$origin&destinations=$destination&key=$apiKey');
 
@@ -77,7 +77,7 @@ class GeminiService {
 
     final model = GenerativeModel(
       model: "gemini-1.5-pro-001",
-      apiKey: 'AIzaSyAgOqd66nXVEF32ucERbna0iMCqJu8Dtkk',
+      apiKey: '',
       tools: [
         Tool(functionDeclarations: [distanceTool])
       ],
