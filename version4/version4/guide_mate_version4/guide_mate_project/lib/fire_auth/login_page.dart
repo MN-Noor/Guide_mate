@@ -2,7 +2,7 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter/material.dart';
 // import '../forms/account_type_page.dart';
-// import '../home_page.dart'; // Adjust the import path as per your project structure
+// import '../home_page.dart'; 
 // import '../fire_auth/auth_service.dart';
 // import 'signup_page.dart';
 //
@@ -125,7 +125,7 @@
 //         Navigator.push(
 //           context,
 //           MaterialPageRoute(
-//             builder: (context) => HomePage(email: email), // Pass email to HomePage
+//             builder: (context) => HomePage(email: email), 
 //           ),
 //         );
 //       } else {
@@ -286,7 +286,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomePage(email: email), // Pass email to HomePage
+            builder: (context) => HomePage(email: email), 
           ),
         );
       } else {
